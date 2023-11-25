@@ -1,7 +1,13 @@
 ﻿namespace ToggleWin10ContextMenu
 {
+    /// <summary>
+    /// Represents the Application.
+    /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// Initializes the main page.
+        /// </summary>
         public App()
         {
             InitializeComponent();
@@ -9,7 +15,11 @@
             MainPage = new AppShell();
         }
 
-
+        /// <summary>
+        /// Creates the window.
+        /// </summary>
+        /// <param name="activationState">Activation state.</param>
+        /// <returns>Window.</returns>
         protected override Window CreateWindow(IActivationState activationState)
         {
             var window = base.CreateWindow(activationState);
@@ -17,6 +27,9 @@
             return window;
         }
 
+        /// <summary>
+        /// Handles the WindowCreated event.
+        /// </summary>
         private async void Window_Created(object sender, EventArgs e)
         {
             const int defaultWidth = 580;
