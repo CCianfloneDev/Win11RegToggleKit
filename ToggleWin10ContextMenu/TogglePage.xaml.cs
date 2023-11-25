@@ -83,7 +83,7 @@ namespace ToggleWin10ContextMenu
         /// </summary>
         /// <param name="keyPath">Path of registry key to check.</param>
         /// <returns>True if the passed registry key exists on this system or not.</returns>
-        private bool RegistryKeyExists(string keyPath)
+        private static bool RegistryKeyExists(string keyPath)
         {
             try
             {
