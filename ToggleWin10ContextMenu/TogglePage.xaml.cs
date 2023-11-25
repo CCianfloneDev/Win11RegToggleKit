@@ -97,7 +97,4 @@ namespace ToggleWin10ContextMenu
             }
         }
     }
-
-
-
 }
