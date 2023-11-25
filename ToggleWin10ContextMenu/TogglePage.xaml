@@ -33,11 +33,8 @@
                         </VisualStateGroupList>
                     </VisualStateManager.VisualStateGroups>
                 </Switch>
-
             </HorizontalStackLayout>
-
-
-
+            <Label Text="Note, switching to the Windows 10 context menu will restart explorer.exe." HorizontalOptions="Center"/>
         </VerticalStackLayout>
     </ScrollView>
 

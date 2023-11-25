@@ -33,7 +33,7 @@
         private async void Window_Created(object sender, EventArgs e)
         {
             const int defaultWidth = 580;
-            const int defaultHeight = 155;
+            const int defaultHeight = 200;
 
             var window = (Window)sender;
             window.Width = defaultWidth;
