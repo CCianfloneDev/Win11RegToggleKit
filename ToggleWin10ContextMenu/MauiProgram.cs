@@ -21,5 +21,6 @@ namespace ToggleWin10ContextMenu
 
             return builder.Build();
         }
+
     }
 }

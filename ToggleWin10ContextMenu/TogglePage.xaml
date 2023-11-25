@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToggleWin10ContextMenu.MainPage">
+    <Shell.TitleView>
+        <Grid>
+            <Label Text="Toggle Windows 10/11 Context Menu" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Medium"/>
+        </Grid>
+    </Shell.TitleView>
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Label Text="Turn this toggle off to switch to the Windows 10 Context Menu." HorizontalOptions="Center" Padding="0,8.5,20,0"/>
+                <Switch IsToggled="True" HorizontalOptions="Center" Toggled="Switch_Toggled">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="On">
+                                    <VisualState.Setters>
+                                        <Setter Property="ThumbColor"
+                        Value="White" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Off">
+                                    <VisualState.Setters>
+                                        <Setter Property="ThumbColor"
+                        Value="Grey" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Switch>
+
+            </HorizontalStackLayout>
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
