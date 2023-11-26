@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToggleWin10ContextMenu", "ToggleWin10ContextMenu\ToggleWin10ContextMenu.csproj", "{183E3F85-6244-4F4B-9AC0-D8FCFFBBA546}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Win11RegToggleKit", "Win11RegToggleKit\Win11RegToggleKit.csproj", "{183E3F85-6244-4F4B-9AC0-D8FCFFBBA546}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
