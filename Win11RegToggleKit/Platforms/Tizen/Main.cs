@@ -2,7 +2,7 @@ using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using System;
 
-namespace ToggleWin10ContextMenu
+namespace Win11RegToggleKit
 {
     internal class Program : MauiApplication
     {

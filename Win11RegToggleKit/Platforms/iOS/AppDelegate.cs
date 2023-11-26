@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace ToggleWin10ContextMenu
+namespace Win11RegToggleKit
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

@@ -1,4 +1,4 @@
-﻿namespace ToggleWin10ContextMenu
+﻿namespace Win11RegToggleKit
 {
     public partial class AppShell : Shell
     {

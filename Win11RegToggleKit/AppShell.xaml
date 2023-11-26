@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="ToggleWin10ContextMenu.AppShell"
+    x:Class="Win11RegToggleKit.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ToggleWin10ContextMenu"
+    xmlns:local="clr-namespace:Win11RegToggleKit"
     Shell.FlyoutBehavior="Disabled"
-    Title="ToggleWin10ContextMenu">
+    Title="Win11RegToggleKit">
 
     <ShellContent
         Title=""

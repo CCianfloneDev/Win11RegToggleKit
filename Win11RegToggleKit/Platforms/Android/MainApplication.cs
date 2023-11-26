@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace ToggleWin10ContextMenu
+namespace Win11RegToggleKit
 {
     [Application]
     public class MainApplication : MauiApplication

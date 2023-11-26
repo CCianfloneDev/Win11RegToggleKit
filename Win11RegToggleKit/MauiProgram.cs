@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace ToggleWin10ContextMenu
+namespace Win11RegToggleKit
 {
     public static class MauiProgram
     {

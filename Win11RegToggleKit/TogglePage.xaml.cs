@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace ToggleWin10ContextMenu
+namespace Win11RegToggleKit
 {
     /// <summary>
     /// Represents the main page.

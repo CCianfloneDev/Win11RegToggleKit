@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace ToggleWin10ContextMenu
+namespace Win11RegToggleKit
 {
     public class Program
     {
