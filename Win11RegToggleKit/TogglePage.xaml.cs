@@ -20,6 +20,7 @@ namespace Win11RegToggleKit
         /// </summary>
         private void Switch_Toggled(object sender, ToggledEventArgs e)
         {
+            Microsoft.Maui.Controls.Switch switchControl = (Microsoft.Maui.Controls.Switch)sender;
             Process process = new();
             Process[] explorerProcesses = Process.GetProcessesByName("explorer");
             ProcessStartInfo startInfo = new()
@@ -32,14 +33,14 @@ namespace Win11RegToggleKit
 
 
             // Check if the registry key exists before attempting to modify it.
-            if (!cmenuSwitch.IsToggled && RegistryKeyExists(registryKeyPath))
+            if (switchControl.IsToggled && RegistryKeyExists(registryKeyPath))
             {
                 Debug.WriteLine("Registry key already exists. No modification needed.");
                 return;
             }
 
             string commandType;
-            if (!cmenuSwitch.IsToggled)
+            if (switchControl.IsToggled)
             {
                 commandType = "created";
                 startInfo.Arguments = $"ADD HKCU\\{registryKeyPath} /f /ve";

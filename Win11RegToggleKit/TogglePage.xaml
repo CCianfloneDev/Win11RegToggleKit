@@ -4,29 +4,30 @@
              x:Class="Win11RegToggleKit.MainPage">
     <Shell.TitleView>
         <Grid>
-            <Label Text="Toggle Windows 10/11 Context Menu" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Medium"/>
+            <Label Text="Windows 11 Registry toolkit" HorizontalOptions="Center"  FontSize="Large"/>
         </Grid>
     </Shell.TitleView>
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Label Text="Turn this toggle off to switch to the Windows 10 Context Menu." HorizontalOptions="Center" Padding="0,8.5,20,0"/>
-                <Switch x:Name="cmenuSwitch" IsToggled="True" HorizontalOptions="Center" Toggled="Switch_Toggled">
+            <Label Text="Dont like some things about Windows 11?" HorizontalOptions="Center" TextColor="Grey" FontSize="Micro"/>
+
+            <HorizontalStackLayout HorizontalOptions="Start">
+                <Label Text="Use the Windows 10 Context Menu." HorizontalOptions="Center" Padding="0,10,0,0"  WidthRequest="250"/>
+                <Switch x:Name="switchWin10Menu" IsToggled="False" HorizontalOptions="Center" Toggled="Switch_Toggled">
+
                     <VisualStateManager.VisualStateGroups>
                         <VisualStateGroupList>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="On">
                                     <VisualState.Setters>
-                                        <Setter Property="ThumbColor"
-                        Value="White" />
+                                        <Setter Property="ThumbColor" Value="Grey" />
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Off">
                                     <VisualState.Setters>
-                                        <Setter Property="ThumbColor"
-                        Value="Grey" />
+                                        <Setter Property="ThumbColor" Value="Grey" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
@@ -34,7 +35,29 @@
                     </VisualStateManager.VisualStateGroups>
                 </Switch>
             </HorizontalStackLayout>
-            <Label Text="Note, switching to the Windows 10 context menu will restart explorer.exe." HorizontalOptions="Center"/>
+            <HorizontalStackLayout HorizontalOptions="Start">
+                <Label Text="Use the old photo viewer." HorizontalOptions="Center" Padding="0,10,0,0"  WidthRequest="250"/>
+                <Switch x:Name="switchPhotoViewer" IsToggled="False" HorizontalOptions="Center">
+
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="On">
+                                    <VisualState.Setters>
+                                        <Setter Property="ThumbColor" Value="Grey" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Off">
+                                    <VisualState.Setters>
+                                        <Setter Property="ThumbColor" Value="Grey" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Switch>
+            </HorizontalStackLayout>
+
         </VerticalStackLayout>
     </ScrollView>
 
