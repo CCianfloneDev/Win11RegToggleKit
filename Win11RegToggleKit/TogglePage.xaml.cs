@@ -29,8 +29,8 @@ namespace Win11RegToggleKit
                 FileName = "reg.exe"
             };
 
-            string registryKeyPath = "Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32";
-
+            //string registryKeyPath = "Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32";
+            string registryKeyPath = GetRegistryKey(switchControl.StyleId);
 
             // Check if the registry key exists before attempting to modify it.
             if (switchControl.IsToggled && RegistryKeyExists(registryKeyPath))
@@ -76,7 +76,6 @@ namespace Win11RegToggleKit
 
                 Process.Start("explorer.exe");
             }
-
         }
 
         /// <summary>
@@ -96,6 +95,27 @@ namespace Win11RegToggleKit
                 Debug.WriteLine($"Error checking registry key: {ex.Message}");
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Returns the registry key to modify for the given switch name.
+        /// </summary>
+        /// <param name="switchName">Switch associated with registry key.</param>
+        /// <returns>Registry Key Path.</returns>
+        public static string GetRegistryKey(string switchName)
+        {
+            if (switchName == "") 
+            {
+                return "";
+            }
+
+            
+            if (switchName == "switchWin10Menu")
+            {
+                return "Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32";
+            }
+
+            return "";
         }
     }
 }
