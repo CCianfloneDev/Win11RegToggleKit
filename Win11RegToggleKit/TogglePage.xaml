@@ -37,7 +37,7 @@
             </HorizontalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Start">
                 <Label Text="Use the old photo viewer." HorizontalOptions="Center" Padding="0,10,0,0"  WidthRequest="250"/>
-                <Switch x:Name="switchPhotoViewer" IsToggled="False" HorizontalOptions="Center">
+                <Switch x:Name="switchPhotoViewer" IsToggled="False" HorizontalOptions="Center" Toggled="Switch_Toggled">
 
                     <VisualStateManager.VisualStateGroups>
                         <VisualStateGroupList>

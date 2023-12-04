@@ -21,60 +21,65 @@ namespace Win11RegToggleKit
         private void Switch_Toggled(object sender, ToggledEventArgs e)
         {
             Microsoft.Maui.Controls.Switch switchControl = (Microsoft.Maui.Controls.Switch)sender;
-            Process process = new();
             Process[] explorerProcesses = Process.GetProcessesByName("explorer");
-            ProcessStartInfo startInfo = new()
-            {
-                WindowStyle = ProcessWindowStyle.Hidden,
-                FileName = "reg.exe"
-            };
 
-            //string registryKeyPath = "Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32";
-            string registryKeyPath = GetRegistryKey(switchControl.StyleId);
+            List<string> registryKeys = GetRegistryKeys(switchControl.StyleId);
 
-            // Check if the registry key exists before attempting to modify it.
-            if (switchControl.IsToggled && RegistryKeyExists(registryKeyPath))
+            foreach (string registryKeyPath in registryKeys)
             {
-                Debug.WriteLine("Registry key already exists. No modification needed.");
-                return;
-            }
 
-            string commandType;
-            if (switchControl.IsToggled)
-            {
-                commandType = "created";
-                startInfo.Arguments = $"ADD HKCU\\{registryKeyPath} /f /ve";
-            }
-            else
-            {
-                commandType = "deleted";
-                startInfo.Arguments = $"DELETE HKCU\\{registryKeyPath} /f";
-            }
-
-            process.StartInfo = startInfo;
-            process.Start();
-            process.WaitForExit();
-
-
-            // Check if the registry key creation was successful.
-            if (process.ExitCode == 0)
-            {
-                Debug.WriteLine($"Registry key {commandType} successfully.");
-            }
-            else
-            {
-                Debug.WriteLine($"Failed to modify the registry key.");
-            }
-
-            // Restart the windows explorer if we created the reg key, dont need to for deleting.
-            if (commandType == "created")
-            {
-                foreach (Process p in explorerProcesses)
+                // Check if the registry key exists before attempting to modify it.
+                if (switchControl.IsToggled && RegistryKeyExists(registryKeyPath))
                 {
-                    p.Kill();
+                    Debug.WriteLine("Registry key already exists. No modification needed.");
+                    return;
                 }
 
-                Process.Start("explorer.exe");
+                Process process = new(); 
+                ProcessStartInfo startInfo = new()
+                {
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    FileName = "reg.exe"
+                };
+
+                string commandType;
+                if (switchControl.IsToggled)
+                {
+                    commandType = "created";
+                    startInfo.Arguments = $"ADD HKCU\\{registryKeyPath} /f /ve";
+                }
+                else
+                {
+                    commandType = "deleted";
+                    startInfo.Arguments = $"DELETE HKCU\\{registryKeyPath} /f";
+                }
+
+                process.StartInfo = startInfo;
+                process.Start();
+                process.WaitForExit();
+
+
+                // Check if the registry key creation was successful.
+                if (process.ExitCode == 0)
+                {
+                    Debug.WriteLine($"Registry key {commandType} successfully.");
+                }
+                else
+                {
+                    Debug.WriteLine($"Failed to modify the registry key.");
+                }
+
+                // Restart the windows explorer if we created the reg key, dont need to for deleting. 
+                // only for the windows 10 context menu regedit
+                if (switchControl.StyleId == switchWin10Menu.StyleId && commandType == "created")
+                {
+                    foreach (Process p in explorerProcesses)
+                    {
+                        p.Kill();
+                    }
+
+                    Process.Start("explorer.exe");
+                }
             }
         }
 
@@ -101,21 +106,33 @@ namespace Win11RegToggleKit
         /// Returns the registry key to modify for the given switch name.
         /// </summary>
         /// <param name="switchName">Switch associated with registry key.</param>
-        /// <returns>Registry Key Path.</returns>
-        public static string GetRegistryKey(string switchName)
+        /// <returns>List of Registry Key Path(s).</returns>
+        public static List<string> GetRegistryKeys(string switchName)
         {
-            if (switchName == "") 
-            {
-                return "";
-            }
+            List<string> registryKeys = new();
 
-            
             if (switchName == "switchWin10Menu")
             {
-                return "Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32";
+                registryKeys.Add("Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32");
             }
+            if (switchName == "switchPhotoViewer")
+            {
+                registryKeys.Add(@"SOFTWARE\Classes\.bmp");
+                registryKeys.Add(@"SOFTWARE\Classes\.gif");
+                registryKeys.Add(@"SOFTWARE\Classes\.ico");
+                registryKeys.Add(@"SOFTWARE\Classes\.jpeg");
+                registryKeys.Add(@"SOFTWARE\Classes\.jpg");
+                registryKeys.Add(@"SOFTWARE\Classes\.png");
+                registryKeys.Add(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.gif\OpenWithProgids");
+                registryKeys.Add(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ico\OpenWithProgids");
+                registryKeys.Add(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.jpeg\OpenWithProgids");
+                registryKeys.Add(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bmp\OpenWithProgids");
+                registryKeys.Add(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.jpg\OpenWithProgids");
+                registryKeys.Add(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.png\OpenWithProgids");
+            }
+             // Add more keys here if needed
 
-            return "";
+            return registryKeys;
         }
     }
 }
