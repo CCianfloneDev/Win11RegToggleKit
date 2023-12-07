@@ -57,6 +57,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Restore_Windows_Photo_Viewer_CURRENT_USER.reg" />
+	  <None Remove="Undo_Restore_Windows_Photo_Viewer_CURRENT_USER.reg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Restore_Windows_Photo_Viewer_CURRENT_USER.reg" />
+	  <EmbeddedResource Include="Undo_Restore_Windows_Photo_Viewer_CURRENT_USER.reg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
