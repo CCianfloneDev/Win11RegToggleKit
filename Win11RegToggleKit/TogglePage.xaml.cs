@@ -16,39 +16,6 @@ namespace Win11RegToggleKit
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Runs the registry edit file from the specified location.
-        /// </summary>
-        /// <param name="filePath">Path of .REG file.</param>
-        /// <param name="restartExplorer">Indicates if the regedit requires a explorer.exe restart.</param>
-        private void ApplyRegistryChangesFromFile(string filePath, bool restartExplorer = false)
-        {
-            Process process = new();
-            ProcessStartInfo startInfo = new()
-            {
-                WindowStyle = ProcessWindowStyle.Hidden,
-                FileName = "reg.exe",
-                Arguments = $"import \"{filePath}\"" // Import the .reg file
-            };
-
-            process.StartInfo = startInfo;
-            process.Start();
-            process.WaitForExit();
-
-            if (process.ExitCode == 0)
-            {
-                Debug.WriteLine("Registry changes applied successfully.");
-
-                if (restartExplorer)
-                {
-                    RestartExplorer();
-                }
-            }
-            else
-            {
-                Debug.WriteLine("Failed to apply registry changes.");
-            }
-        }
 
         private void ApplyRegistryChangesFromResource(string resourceName, bool restartExplorer = false)
         {
@@ -57,12 +24,37 @@ namespace Win11RegToggleKit
             {
                 using StreamReader reader = new(stream);
                 string registryContent = reader.ReadToEnd();
-                string temporaryPath = Path.GetTempFileName(); // Create a temporary .reg file
+                string temporaryPath = Path.GetTempFileName(); 
 
-                // Write the content of the embedded resource to the temporary .reg file
+                // Create a temporary .reg file Write the content of the embedded resource to the file
                 File.WriteAllText(temporaryPath, registryContent);
 
-                ApplyRegistryChangesFromFile(temporaryPath, restartExplorer);
+                Process process = new();
+                ProcessStartInfo startInfo = new()
+                {
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    FileName = "reg.exe",
+                    Arguments = $"import \"{temporaryPath}\""
+                };
+
+                process.StartInfo = startInfo;
+                process.Start();
+                process.WaitForExit();
+
+                if (process.ExitCode == 0)
+                {
+                    Debug.WriteLine("Registry changes applied successfully.");
+
+                    if (restartExplorer)
+                    {
+                        RestartExplorer();
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("Failed to apply registry changes.");
+                }
+                //ApplyRegistryChangesFromFile(temporaryPath, restartExplorer);
 
                 // Delete the temporary .reg file after applying changes
                 File.Delete(temporaryPath);
@@ -72,6 +64,40 @@ namespace Win11RegToggleKit
                 Debug.WriteLine("Resource not found.");
             }
         }
+
+        ///// <summary>
+        ///// Runs the registry edit file from the specified location.
+        ///// </summary>
+        ///// <param name="filePath">Path of .REG file.</param>
+        ///// <param name="restartExplorer">Indicates if the regedit requires a explorer.exe restart.</param>
+        //private void ApplyRegistryChangesFromFile(string filePath, bool restartExplorer = false)
+        //{
+        //    Process process = new();
+        //    ProcessStartInfo startInfo = new()
+        //    {
+        //        WindowStyle = ProcessWindowStyle.Hidden,
+        //        FileName = "reg.exe",
+        //        Arguments = $"import \"{filePath}\""
+        //    };
+
+        //    process.StartInfo = startInfo;
+        //    process.Start();
+        //    process.WaitForExit();
+
+        //    if (process.ExitCode == 0)
+        //    {
+        //        Debug.WriteLine("Registry changes applied successfully.");
+
+        //        if (restartExplorer)
+        //        {
+        //            RestartExplorer();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Debug.WriteLine("Failed to apply registry changes.");
+        //    }
+        //}
 
 
         private void ApplyOldPhotoViewer()
