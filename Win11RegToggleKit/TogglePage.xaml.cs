@@ -8,6 +8,8 @@ namespace Win11RegToggleKit
     /// </summary>
     public partial class MainPage : ContentPage
     {
+        private static string BaseRegEditsDirectory => "Win11RegToggleKit.Resources.RegistryEdits.";
+
         /// <summary>
         /// Initializes the main page.
         /// </summary>
@@ -19,16 +21,24 @@ namespace Win11RegToggleKit
 
         private void ApplyRegistryChangesFromResource(string resourceName, bool restartExplorer = false)
         {
-            using Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
-            if (stream != null)
+            try
             {
+                using Stream? stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
+
+                if (stream == null)
+                {
+                    Debug.WriteLine($"Resource not found: {resourceName}");
+                    return;
+                }
+
                 using StreamReader reader = new(stream);
                 string registryContent = reader.ReadToEnd();
-                string temporaryPath = Path.GetTempFileName(); 
+                string temporaryPath = Path.GetTempFileName();
 
                 // Create a temporary .reg file Write the content of the embedded resource to the file
                 File.WriteAllText(temporaryPath, registryContent);
 
+                // Start reg.exe process and run the temporary .reg file
                 Process process = new();
                 ProcessStartInfo startInfo = new()
                 {
@@ -49,65 +59,30 @@ namespace Win11RegToggleKit
                     {
                         RestartExplorer();
                     }
-                }
-                else
+                } else
                 {
-                    Debug.WriteLine("Failed to apply registry changes.");
+                    Debug.WriteLine($"Failed to apply registry changes: {process.ExitCode}");
                 }
-                //ApplyRegistryChangesFromFile(temporaryPath, restartExplorer);
 
                 // Delete the temporary .reg file after applying changes
                 File.Delete(temporaryPath);
-            }
-            else
+            } 
+            catch (Exception error) 
             {
-                Debug.WriteLine("Resource not found.");
+                string currentMethod = MethodBase.GetCurrentMethod()!.Name;
+                Debug.WriteLine($"Error:{currentMethod}:{error}");
             }
         }
-
-        ///// <summary>
-        ///// Runs the registry edit file from the specified location.
-        ///// </summary>
-        ///// <param name="filePath">Path of .REG file.</param>
-        ///// <param name="restartExplorer">Indicates if the regedit requires a explorer.exe restart.</param>
-        //private void ApplyRegistryChangesFromFile(string filePath, bool restartExplorer = false)
-        //{
-        //    Process process = new();
-        //    ProcessStartInfo startInfo = new()
-        //    {
-        //        WindowStyle = ProcessWindowStyle.Hidden,
-        //        FileName = "reg.exe",
-        //        Arguments = $"import \"{filePath}\""
-        //    };
-
-        //    process.StartInfo = startInfo;
-        //    process.Start();
-        //    process.WaitForExit();
-
-        //    if (process.ExitCode == 0)
-        //    {
-        //        Debug.WriteLine("Registry changes applied successfully.");
-
-        //        if (restartExplorer)
-        //        {
-        //            RestartExplorer();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Debug.WriteLine("Failed to apply registry changes.");
-        //    }
-        //}
-
+        
 
         private void ApplyOldPhotoViewer()
         {
-            ApplyRegistryChangesFromResource("Win11RegToggleKit.Restore_Windows_Photo_Viewer_CURRENT_USER.reg");
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Restore_Windows_Photo_Viewer_CURRENT_USER.reg");
         }
 
         private void RemoveOldPhotoViewer()
         {
-            ApplyRegistryChangesFromResource("Win11RegToggleKit.Undo_Restore_Windows_Photo_Viewer_CURRENT_USER.reg");
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_Restore_Windows_Photo_Viewer_CURRENT_USER.reg");
         }
 
         //private void ApplyWindows10ContextMenu()
