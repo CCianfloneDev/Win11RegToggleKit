@@ -65,9 +65,9 @@
 
 	<ItemGroup>
 	  <EmbeddedResource Include="Resources\RegistryEdits\Restore_Windows_Photo_Viewer_CURRENT_USER.reg" />
-	  <EmbeddedResource Include="Resources\RegistryEdits\Undo_Restore_Windows_Photo_Viewer_CURRENT_USER.reg" />
+	  <EmbeddedResource Include="Resources\RegistryEdits\Undo_Windows_Photo_Viewer_CURRENT_USER.reg" />
 	  <EmbeddedResource Include="Resources\RegistryEdits\Undo_Windows10_Context_Menu_For_Windows11.reg" />
-	  <EmbeddedResource Include="Resources\RegistryEdits\Windows10_Context_Menu_For_Windows11.reg" />
+	  <EmbeddedResource Include="Resources\RegistryEdits\Restore_Windows10_Context_Menu_For_Windows11.reg" />
 	</ItemGroup>
 
 	<ItemGroup>

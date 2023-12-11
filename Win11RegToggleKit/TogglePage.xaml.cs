@@ -85,19 +85,15 @@ namespace Win11RegToggleKit
             ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_Restore_Windows_Photo_Viewer_CURRENT_USER.reg");
         }
 
-        //private void ApplyWindows10ContextMenu()
-        //{
-        //    string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); // Get the directory where the .sln file is located
-        //    string filePath = Path.Combine(directory, "AddWindows10ContextMenu.reg");
-        //    ApplyRegistryChangesFromFile(filePath, restartExplorer: true); // Restart explorer when applying changes
-        //}
+        private void ApplyWindows10ContextMenu()
+        {
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Restore_Windows10_Context_Menu_For_Windows11.reg", restartExplorer:true);
+        }
 
-        //private void RemoveWindows10ContextMenu()
-        //{
-        //    string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); // Get the directory where the .sln file is located
-        //    string filePath = Path.Combine(directory, "RemoveWindows10ContextMenu.reg");
-        //    ApplyRegistryChangesFromFile(filePath);
-        //}
+        private void RemoveWindows10ContextMenu()
+        {
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_Windows10_Context_Menu_For_Windows11.reg");
+        }
 
         private void RestartExplorer()
         {
@@ -119,14 +115,14 @@ namespace Win11RegToggleKit
 
             if (switchControl.StyleId == switchWin10Menu.StyleId)
             {
-                //if (switchControl.IsToggled)
-                //{
-                //    ApplyWindows10ContextMenu();
-                //}
-                //else
-                //{
-                //    RemoveWindows10ContextMenu();
-                //}
+                if (switchControl.IsToggled)
+                {
+                    ApplyWindows10ContextMenu();
+                }
+                else
+                {
+                    RemoveWindows10ContextMenu();
+                }
             }
             else if (switchControl.StyleId == switchPhotoViewer.StyleId)
             {
