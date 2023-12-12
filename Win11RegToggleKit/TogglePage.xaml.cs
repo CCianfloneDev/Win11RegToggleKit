@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Win11RegToggleKit
 {
@@ -97,12 +98,20 @@ namespace Win11RegToggleKit
 
         private void RestartExplorer()
         {
-            Process[] explorerProcesses = Process.GetProcessesByName("explorer");
-            foreach (Process process in explorerProcesses)
+            try
             {
-                process.Kill();
+                Process[] explorerProcesses = Process.GetProcessesByName("explorer");
+                foreach (Process process in explorerProcesses)
+                {
+                    process.Kill();
+                }
+                Process.Start("explorer.exe");
             }
-            Process.Start("explorer.exe");
+            catch ( Exception error )
+            {
+                string currentMethod = MethodBase.GetCurrentMethod()!.Name;
+                Debug.WriteLine($"Error:{currentMethod}:{error}");
+            }
         }
 
 
@@ -111,29 +120,38 @@ namespace Win11RegToggleKit
         /// </summary>
         private void Switch_Toggled(object sender, ToggledEventArgs e)
         {
-            Microsoft.Maui.Controls.Switch switchControl = (Microsoft.Maui.Controls.Switch)sender;
+            try 
+            {
+                Microsoft.Maui.Controls.Switch switchControl = (Microsoft.Maui.Controls.Switch)sender;
 
-            if (switchControl.StyleId == switchWin10Menu.StyleId)
+                if (switchControl.StyleId == switchWin10Menu.StyleId)
+                {
+                    if (switchControl.IsToggled)
+                    {
+                        ApplyWindows10ContextMenu();
+                    }
+                    else
+                    {
+                        RemoveWindows10ContextMenu();
+                    }
+                }
+                else if (switchControl.StyleId == switchPhotoViewer.StyleId)
+                {
+                    if (switchControl.IsToggled)
+                    {
+                        ApplyOldPhotoViewer();
+                    }
+                    else
+                    {
+                        RemoveOldPhotoViewer();
+                    }
+                }
+
+            } 
+            catch (Exception error) 
             {
-                if (switchControl.IsToggled)
-                {
-                    ApplyWindows10ContextMenu();
-                }
-                else
-                {
-                    RemoveWindows10ContextMenu();
-                }
-            }
-            else if (switchControl.StyleId == switchPhotoViewer.StyleId)
-            {
-                if (switchControl.IsToggled)
-                {
-                    ApplyOldPhotoViewer();
-                }
-                else
-                {
-                    RemoveOldPhotoViewer();
-                }
+                string currentMethod = MethodBase.GetCurrentMethod()!.Name;
+                Debug.WriteLine($"Error:{currentMethod}:{error}");
             }
         }
     }
