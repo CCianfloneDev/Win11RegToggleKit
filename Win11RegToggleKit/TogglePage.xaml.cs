@@ -96,6 +96,9 @@ namespace Win11RegToggleKit
             ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_Windows10_Context_Menu_For_Windows11.reg");
         }
 
+        /// <summary>
+        /// Restarts explorer.exe
+        /// </summary>
         private void RestartExplorer()
         {
             try
