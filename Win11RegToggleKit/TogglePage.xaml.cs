@@ -91,6 +91,10 @@ namespace Win11RegToggleKit
             ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Restore_Windows10_Context_Menu_For_Windows11.reg", restartExplorer:true);
         }
 
+        /// <summary>
+        /// Removes the Windows 10 Context menu registry edit.
+        /// </summary>
+        /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
         private void RemoveWindows10ContextMenu()
         {
             ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_Windows10_Context_Menu_For_Windows11.reg");
