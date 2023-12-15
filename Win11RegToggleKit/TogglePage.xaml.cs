@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Win11RegToggleKit
 {
@@ -86,6 +85,10 @@ namespace Win11RegToggleKit
             ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_Restore_Windows_Photo_Viewer_CURRENT_USER.reg");
         }
 
+        /// <summary>
+        /// Applies the Windows 10 Context menu registry edit.
+        /// </summary>
+        /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
         private void ApplyWindows10ContextMenu()
         {
             ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Restore_Windows10_Context_Menu_For_Windows11.reg", restartExplorer:true);
