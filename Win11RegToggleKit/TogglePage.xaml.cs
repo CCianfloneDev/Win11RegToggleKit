@@ -80,6 +80,10 @@ namespace Win11RegToggleKit
             ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Restore_Windows_Photo_Viewer_CURRENT_USER.reg");
         }
 
+        /// <summary>
+        /// Removes the old windows photo viewer registry edit.
+        /// </summary>
+        /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
         private void RemoveOldPhotoViewer()
         {
             ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_Restore_Windows_Photo_Viewer_CURRENT_USER.reg");
