@@ -90,7 +90,7 @@ namespace Win11RegToggleKit
         /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
         private void ApplyOldPhotoViewer()
         {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Restore_Windows_Photo_Viewer_CURRENT_USER.reg");
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_Windows_Photo_Viewer_CURRENT_USER.reg");
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Win11RegToggleKit
         /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
         private void ApplyWindows10ContextMenu()
         {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Restore_Windows10_Context_Menu_For_Windows11.reg", restartExplorer:true);
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_Windows10_Context_Menu_For_Windows11.reg", restartExplorer:true);
         }
 
         /// <summary>
