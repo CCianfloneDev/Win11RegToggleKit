@@ -18,11 +18,21 @@ namespace Win11RegToggleKit
             InitializeComponent();
         }
 
-
+        /// <summary>
+        /// Applies Registry Edit changes from a specified embedded .reg resource file.
+        /// </summary>
+        /// <param name="resourceName">Name of the .REG file to run.</param>
+        /// <param name="restartExplorer">Indicates if explorer.exe needs to restart.</param>
         private void ApplyRegistryChangesFromResource(string resourceName, bool restartExplorer = false)
         {
             try
             {
+                if (!resourceName.EndsWith(".reg", StringComparison.OrdinalIgnoreCase))
+                {
+                    Debug.WriteLine($"Invalid resource file format: {resourceName}");
+                    return;
+                }
+
                 using Stream? stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
 
                 if (stream == null)
@@ -73,8 +83,11 @@ namespace Win11RegToggleKit
                 Debug.WriteLine($"Error:{currentMethod}:{error}");
             }
         }
-        
 
+        /// <summary>
+        /// Applies the old windows photo viewer registry edit.
+        /// </summary>
+        /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
         private void ApplyOldPhotoViewer()
         {
             ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Restore_Windows_Photo_Viewer_CURRENT_USER.reg");
