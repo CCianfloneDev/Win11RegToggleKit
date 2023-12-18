@@ -57,7 +57,28 @@
                     </VisualStateManager.VisualStateGroups>
                 </Switch>
             </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Start">
+                <Label Text="Allow upgrades with unsupported TPM or CPU." HorizontalOptions="Center" Padding="0,10,0,0"  WidthRequest="250"/>
+                <Switch x:Name="allowUnsupportedUpgrades" IsToggled="False" HorizontalOptions="Center" Toggled="Switch_Toggled">
 
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="On">
+                                    <VisualState.Setters>
+                                        <Setter Property="ThumbColor" Value="Grey" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Off">
+                                    <VisualState.Setters>
+                                        <Setter Property="ThumbColor" Value="Grey" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Switch>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 

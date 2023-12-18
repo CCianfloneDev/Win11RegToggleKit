@@ -90,16 +90,16 @@ namespace Win11RegToggleKit
         /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
         private void ApplyOldPhotoViewer()
         {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_Windows_Photo_Viewer_CURRENT_USER.reg");
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_WindowsPhotoViewer.reg");
         }
 
         /// <summary>
         /// Removes the old windows photo viewer registry edit.
         /// </summary>
         /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
-        private void RemoveOldPhotoViewer()
+        private void UndoOldPhotoViewer()
         {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_Restore_Windows_Photo_Viewer_CURRENT_USER.reg");
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_WindowsPhotoViewer.reg");
         }
 
         /// <summary>
@@ -108,16 +108,16 @@ namespace Win11RegToggleKit
         /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
         private void ApplyWindows10ContextMenu()
         {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_Windows10_Context_Menu_For_Windows11.reg", restartExplorer:true);
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_Windows10ContextMenuForWindows11.reg", restartExplorer:true);
         }
 
         /// <summary>
         /// Removes the Windows 10 Context menu registry edit.
         /// </summary>
         /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
-        private void RemoveWindows10ContextMenu()
+        private void UndoWindows10ContextMenu()
         {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_Windows10_Context_Menu_For_Windows11.reg");
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_Windows10ContextMenuForWindows11.reg");
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Win11RegToggleKit
                     }
                     else
                     {
-                        RemoveWindows10ContextMenu();
+                        UndoWindows10ContextMenu();
                     }
                 }
                 else if (switchControl.StyleId == switchPhotoViewer.StyleId)
@@ -170,7 +170,18 @@ namespace Win11RegToggleKit
                     }
                     else
                     {
-                        RemoveOldPhotoViewer();
+                        UndoOldPhotoViewer();
+                    }
+                }
+                else if (switchControl.StyleId == allowUnsupportedUpgrades.StyleId)
+                {
+                    if (switchControl.IsToggled)
+                    {
+                        // ApplyAllowUnsupportedUpgrades();
+                    }
+                    else
+                    {
+                        // UndoAllowUnsupportedUpgrades();
                     }
                 }
 
