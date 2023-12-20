@@ -5,9 +5,10 @@ Welcome to Win11RegToggleKit! This toolkit, created using .NET Maui 8.0, offers 
 ### Functionality:
 - [x] Switch between the Windows 11 and Windows 10 context menus.
 - [x] Switch between the old Windows photo viewer and the default.
-- [ ] Bypass TPM and CPU Checks to Install Windows 11 Update
-- [ ] Disable Bing Search From Windows 11 Start Menu
-- [ ] Disable Cortana on Windows 11
+- [ ] Bypass TPM and CPU Checks to Install Windows 11 Update.
+- [ ] Disable Bing Search From Windows 11 Start Menu.
+- [ ] Disable Cortana on Windows 11.
+- [ ] Save settings.
 
 
 ## Screenshots:
