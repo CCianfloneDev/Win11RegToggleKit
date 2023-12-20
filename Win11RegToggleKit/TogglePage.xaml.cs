@@ -121,6 +121,24 @@ namespace Win11RegToggleKit
         }
 
         /// <summary>
+        /// Applies the Allow unsupported upgrades registry edit.
+        /// </summary>
+        /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
+        private void ApplyAllowUnsupportedUpgrades()
+        {
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_AllowUpgradesWithUnsupportedTPMOrCPU.reg");
+        }
+
+        /// <summary>
+        /// Removes the Allow unsupported upgrades registry edit.
+        /// </summary>
+        /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
+        private void UndoAllowUnsupportedUpgrades()
+        {
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_AllowUpgradesWithUnsupportedTPMOrCPU.reg");
+        }
+
+        /// <summary>
         /// Restarts explorer.exe
         /// </summary>
         private void RestartExplorer()
@@ -177,11 +195,11 @@ namespace Win11RegToggleKit
                 {
                     if (switchControl.IsToggled)
                     {
-                        // ApplyAllowUnsupportedUpgrades();
+                        ApplyAllowUnsupportedUpgrades();
                     }
                     else
                     {
-                        // UndoAllowUnsupportedUpgrades();
+                        UndoAllowUnsupportedUpgrades();
                     }
                 }
 
