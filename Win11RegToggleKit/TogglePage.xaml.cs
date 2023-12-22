@@ -126,7 +126,7 @@ namespace Win11RegToggleKit
         /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
         private void ApplyAllowUnsupportedUpgrades()
         {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_AllowUpgradesWithUnsupportedTPMOrCPU.reg");
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_AllowUnsupportedUpgrades.reg");
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Win11RegToggleKit
         /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
         private void UndoAllowUnsupportedUpgrades()
         {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_AllowUpgradesWithUnsupportedTPMOrCPU.reg");
+            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_AllowUnsupportedUpgrades.reg");
         }
 
         /// <summary>
