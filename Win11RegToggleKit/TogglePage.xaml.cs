@@ -8,6 +8,9 @@ namespace Win11RegToggleKit
     /// </summary>
     public partial class MainPage : ContentPage
     {
+        /// <summary>
+        /// Represents the base directory which stores the registry edit files.
+        /// </summary>
         private static string BaseRegEditsDirectory => "Win11RegToggleKit.Resources.RegistryEdits.";
 
         /// <summary>
