@@ -88,60 +88,6 @@ namespace Win11RegToggleKit
         }
 
         /// <summary>
-        /// Applies the old windows photo viewer registry edit.
-        /// </summary>
-        /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
-        private void ApplyOldPhotoViewer()
-        {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_WindowsPhotoViewer.reg");
-        }
-
-        /// <summary>
-        /// Removes the old windows photo viewer registry edit.
-        /// </summary>
-        /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
-        private void UndoOldPhotoViewer()
-        {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_WindowsPhotoViewer.reg");
-        }
-
-        /// <summary>
-        /// Applies the Windows 10 Context menu registry edit.
-        /// </summary>
-        /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
-        private void ApplyWindows10ContextMenu()
-        {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_Windows10ContextMenuForWindows11.reg", restartExplorer:true);
-        }
-
-        /// <summary>
-        /// Removes the Windows 10 Context menu registry edit.
-        /// </summary>
-        /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
-        private void UndoWindows10ContextMenu()
-        {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_Windows10ContextMenuForWindows11.reg");
-        }
-
-        /// <summary>
-        /// Applies the Allow unsupported upgrades registry edit.
-        /// </summary>
-        /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
-        private void ApplyAllowUnsupportedUpgrades()
-        {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_AllowUnsupportedUpgrades.reg");
-        }
-
-        /// <summary>
-        /// Removes the Allow unsupported upgrades registry edit.
-        /// </summary>
-        /// <remarks>This runs an file found in the project resources to perform said registry edit.</remarks>
-        private void UndoAllowUnsupportedUpgrades()
-        {
-            ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_AllowUnsupportedUpgrades.reg");
-        }
-
-        /// <summary>
         /// Restarts explorer.exe
         /// </summary>
         private void RestartExplorer()
@@ -176,33 +122,44 @@ namespace Win11RegToggleKit
                 {
                     if (switchControl.IsToggled)
                     {
-                        ApplyWindows10ContextMenu();
+                       ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_Windows10ContextMenuForWindows11.reg", restartExplorer:true);
                     }
                     else
                     {
-                        UndoWindows10ContextMenu();
+                        ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_Windows10ContextMenuForWindows11.reg");
                     }
                 }
                 else if (switchControl.StyleId == switchPhotoViewer.StyleId)
                 {
                     if (switchControl.IsToggled)
                     {
-                        ApplyOldPhotoViewer();
+                        ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_WindowsPhotoViewer.reg");
                     }
                     else
                     {
-                        UndoOldPhotoViewer();
+                        ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_WindowsPhotoViewer.reg");
                     }
                 }
                 else if (switchControl.StyleId == allowUnsupportedUpgrades.StyleId)
                 {
                     if (switchControl.IsToggled)
                     {
-                        ApplyAllowUnsupportedUpgrades();
+                        ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_AllowUnsupportedUpgrades.reg");
                     }
                     else
                     {
-                        UndoAllowUnsupportedUpgrades();
+                        ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_AllowUnsupportedUpgrades.reg");
+                    }
+                }
+                else if (switchControl.StyleId == showFileExtensions.StyleId)
+                {
+                    if (switchControl.IsToggled) 
+                    {
+                        ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Apply_ShowFileExtensions.reg");
+                    }
+                    else
+                    {
+                        ApplyRegistryChangesFromResource($"{BaseRegEditsDirectory}Undo_ShowFileExtensions.reg");
                     }
                 }
 
