@@ -59,8 +59,10 @@
 	<ItemGroup>
 	  <None Remove="Resources\RegistryEdits\Apply_AllowUnsupportedUpgrades.reg" />
 	  <None Remove="Resources\RegistryEdits\Apply_ShowFileExtensions.reg" />
+	  <None Remove="Resources\RegistryEdits\Apply_ShowHiddenFiles.reg" />
 	  <None Remove="Resources\RegistryEdits\Undo_AllowUnsupportedUpgrades.reg" />
 	  <None Remove="Resources\RegistryEdits\Undo_ShowFileExtensions.reg" />
+	  <None Remove="Resources\RegistryEdits\Undo_ShowHiddenFiles.reg" />
 	  <None Remove="Resources\Undo_Windows10_Context_Menu_For_Windows11.reg" />
 	  <None Remove="Resources\Windows10_Context_Menu_For_Windows11.reg" />
 	  <None Remove="Restore_Windows_Photo_Viewer_CURRENT_USER.reg" />
@@ -70,9 +72,11 @@
 	<ItemGroup>
 	  <EmbeddedResource Include="Resources\RegistryEdits\Apply_AllowUnsupportedUpgrades.reg" />
 	  <EmbeddedResource Include="Resources\RegistryEdits\Apply_ShowFileExtensions.reg" />
+	  <EmbeddedResource Include="Resources\RegistryEdits\Apply_ShowHiddenFiles.reg" />
 	  <EmbeddedResource Include="Resources\RegistryEdits\Apply_WindowsPhotoViewer.reg" />
 	  <EmbeddedResource Include="Resources\RegistryEdits\Undo_AllowUnsupportedUpgrades.reg" />
 	  <EmbeddedResource Include="Resources\RegistryEdits\Undo_ShowFileExtensions.reg" />
+	  <EmbeddedResource Include="Resources\RegistryEdits\Undo_ShowHiddenFiles.reg" />
 	  <EmbeddedResource Include="Resources\RegistryEdits\Undo_WindowsPhotoViewer.reg" />
 	  <EmbeddedResource Include="Resources\RegistryEdits\Undo_Windows10ContextMenuForWindows11.reg" />
 	  <EmbeddedResource Include="Resources\RegistryEdits\Apply_Windows10ContextMenuForWindows11.reg" />
